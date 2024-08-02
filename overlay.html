@@ -2,7 +2,7 @@
 <html>
   <head>
     <script>
-      const params = new URL(document.location).searchParams;
+      var params = new URL(document.location).searchParams;
     </script>
     <script src="files/title.js"></script>
     <script src="files/banner.js"></script>
@@ -369,12 +369,12 @@
         title = "Akhand Keertan Smaagam";
       }
 
-      const el = document.createElement("span");
+      var el = document.createElement("span");
       el.classList.add("separator");
       document.getElementById("title").innerHTML = `${el.outerHTML} ${title}`;
 
       // get banner
-      const banner = document.getElementById("banner");
+      var banner = document.getElementById("banner");
 
       // add banner items to banner
       bannerItems = [
@@ -385,20 +385,20 @@
         "Follow @AKJdotOrg on Instagram and Twitter",
       ];
       bannerItems.map((item) => {
-        const el = document.createElement("div");
+        var el = document.createElement("div");
         el.textContent = item;
         banner.appendChild(el);
       });
 
       // cycle banner messages
-      const bannerDivs = banner.getElementsByTagName("div");
-      const numBannerDivs = bannerDivs.length;
+      var bannerDivs = banner.getElementsByTagName("div");
+      var numBannerDivs = bannerDivs.length;
       bannerDivs[0].classList.add("show");
       bannerDivs[numBannerDivs - 1].classList.add("gone");
       setInterval(function () {
         // get currently active banner item and figure out next one
-        const current = document.getElementsByClassName("show")[0];
-        const next = current.nextSibling;
+        var current = document.getElementsByClassName("show")[0];
+        var next = current.nextSibling;
         if (!next) {
           next = bannerDivs[0];
         }
@@ -407,19 +407,19 @@
         document.getElementsByClassName("gone")[0].classList.remove("gone");
         current.classList.replace("show", "gone");
         next.classList.add("show");
-      }, 10000);
+      }, 12500);
 
       // update date time
-      const dateSpan = document.getElementById("date");
-      const timeSpan = document.getElementById("time");
+      var dateSpan = document.getElementById("date");
+      var timeSpan = document.getElementById("time");
       function updateDateTime() {
-        const d = new Date();
-        const localeDate = d.toLocaleDateString([], {
+        var d = new Date();
+        var localeDate = d.toLocaleDateString([], {
           weekday: "short",
           month: "short",
           day: "numeric",
         });
-        const localeTime = d.toLocaleTimeString([], {
+        var localeTime = d.toLocaleTimeString([], {
           hour: "numeric",
           minute: "2-digit",
         });

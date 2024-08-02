@@ -1,12 +1,12 @@
 // can change to "light", "dark", "classic", etc
-const customTheme = "dark";
+var customTheme = "dark";
 
-const theme = params.has("theme") ? params.get("theme") : customTheme;
+var theme = params.has("theme") ? params.get("theme") : customTheme;
 
 // hexadecimal color code for transparency
 // https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
 
-const themes = {
+var themes = {
   light: {
     logo: "#282550",
     fg1: "#000000cc",
@@ -36,7 +36,7 @@ const themes = {
   },
 };
 
-const root = document.querySelector(":root");
+var root = document.querySelector(":root");
 
 root.style.setProperty("--logo-color", themes[theme].logo);
 root.style.setProperty("--primary", themes[theme].fg1);

@@ -14,7 +14,7 @@
         --logo-width: calc(var(--hud-row-height) * 0.75 * 0.8617580022);
         --screen-padding: 5vw;
         --animation-duration: 1.25s;
-        --translate-length: 30px;
+        --translate-length: 16px;
       }
       body {
         margin: 0;
@@ -137,6 +137,9 @@
       @keyframes slidein {
         0% {
           opacity: 0;
+        }
+        25% {
+          opacity: 0;
           transform: translateY(var(--translate-length));
         }
         100% {
@@ -150,10 +153,13 @@
           opacity: 1;
           transform: translateY(0);
         }
-        100% {
+        75% {
           opacity: 0;
           display: none;
           transform: translateY(calc(var(--translate-length) * -1));
+        }
+        100% {
+          opacity: 0;
         }
       }
     </style>

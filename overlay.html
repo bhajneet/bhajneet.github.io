@@ -134,6 +134,54 @@
         );
         margin: 0 0.2em;
       }
+
+      /* banner disabled design */
+      .nb {
+        --screen-padding: 1.8em;
+        --hud-row-height: 1.8em;
+        /* font-size: 0.875em; */
+      }
+      .nb #banner {
+        display: none;
+      }
+      .nb .separator {
+        display: none;
+      }
+
+      .nb #title {
+        opacity: 0.85;
+      }
+      .nb #datetime {
+        gap: 0.9em;
+        opacity: 0.65;
+      }
+      .nb footer {
+        display: flex;
+        justify-content: center;
+        padding-bottom: calc(var(--screen-padding) * 0.4);
+      }
+      .nb #topbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+      }
+      .nb #left,
+      .nb #topbar {
+        padding-top: 0.4em;
+        padding-bottom: 0.4em;
+      }
+      .nb #left {
+        clip-path: none;
+        border-radius: 2.5em 0 0 2.5em;
+        padding-left: 0.9em;
+        padding-right: 1em;
+      }
+      .nb #topbar {
+        border-radius: 0 2.5em 2.5em 0;
+      }
+
       @keyframes slidein {
         0% {
           opacity: 0;
@@ -370,9 +418,9 @@
   </body>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // set title if blank
-      if (title.length < 1) {
-        title = "Akhand Keertan Smaagam";
+      // hide banner if disabled
+      if (!isBanner) {
+        document.body.classList.add("nb");
       }
 
       var el = document.createElement("span");
@@ -391,6 +439,9 @@
         "Follow @AKJdotOrg on Instagram",
       ];
       bannerItems.map((item) => {
+        if (item.length < 1) {
+          return;
+        }
         var el = document.createElement("div");
         el.textContent = item;
         banner.appendChild(el);
@@ -424,6 +475,7 @@
           weekday: "short",
           month: "short",
           day: "numeric",
+          year: "numeric",
         });
         var localeTime = d.toLocaleTimeString([], {
           hour: "numeric",

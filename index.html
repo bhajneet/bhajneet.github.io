@@ -310,10 +310,7 @@
       </li>
       <li>Select the matching theme in Shabad OS.</li>
     </ul>
-    <p>
-      If you don't have access to the css files, you may right click and "Save
-      Link As..." from here:
-    </p>
+    <p>Top bar themes (Right-click > "Save Link As...")</p>
     <ul>
       <li>
         <a href="shabad os/AKJ Dark.css" target="_blank" download
@@ -330,6 +327,71 @@
           >AKJ Classic.css</a
         >
       </li>
+    </ul>
+
+    <h2>Minimal / compact mode</h2>
+    <ul>
+      <li>
+        Update the
+        <code>banner.js</code> file's <code>customIsBanner</code> to be equal to
+        <code>false</code>.
+      </li>
+      <li>This mode uses a dynamic width without a banner.</li>
+      <li>It only contains the logo, the title, and the date & time.</li>
+      <li>The Shabad OS overlays listed below will also take up less space.</li>
+    </ul>
+    <p>Minimal themes (Right-click > "Save Link As...")</p>
+    <ul>
+      <li>
+        <a href="shabad os/AKJ Minimal Dark.css" target="_blank" download
+          >AKJ Minimal Dark.css</a
+        >
+      </li>
+      <li>
+        <a href="shabad os/AKJ Minimal Light.css" target="_blank" download
+          >AKJ Minimal Light.css</a
+        >
+      </li>
+      <li>
+        <a href="shabad os/AKJ Minimal Classic.css" target="_blank" download
+          >AKJ Minimal Classic.css</a
+        >
+      </li>
+    </ul>
+
+    <h2>Live stream from mobile devices with URL Parameters</h2>
+    <p>
+      URL parameters can be added to the end of the URL. This lets you use this
+      overlay without downloading the files. The first parameter always follows
+      a
+      <code>?</code> and all subsequent paramters are joined with an
+      <code>&</code>. For example, to set a custom title and theme you would add
+      to the end of the URL either of the following:
+    </p>
+    <ul>
+      <li><code>?title=AKJ Smagam&theme=classic</code></li>
+      <li><code>?theme=classic&title=AKJ Smagam</code></li>
+    </ul>
+    <p>
+      The browser will automatically convert spaces to <code>%20</code>, which
+      is the URL code for a space. So "AKJ Smagam" will become
+      <code>AKJ%20Smagam</code>. This is not a problem.
+    </p>
+    <p>Here is a list of different URL parameters:</p>
+    <ul>
+      <li>
+        <code>title=Your Custom Title</code> - Set a custom title for the
+        overlay.
+      </li>
+      <li>
+        <code>banner=Your Custom Banner&banner=another banner item</code> - Set
+        a custom banner for the overlay.
+      </li>
+      <li>
+        <code>theme=dark</code> - Set the theme of the overlay (can also choose
+        light or classic).
+      </li>
+      <li><code>minimal=true</code> - Use the minimal / compact style.</li>
     </ul>
   </body>
 </html>

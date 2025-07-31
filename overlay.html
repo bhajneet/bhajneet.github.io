@@ -471,8 +471,10 @@
       var timeSpan = document.getElementById("time");
       function updateDateTime() {
         var d = new Date();
-        var localeDate = d.toLocaleDateString([], {
+        var localeDow = d.toLocaleDateString([], {
           weekday: "short",
+        });
+        var localeDate = d.toLocaleDateString([], {
           month: "short",
           day: "numeric",
           year: "numeric",
@@ -482,7 +484,7 @@
           minute: "2-digit",
         });
 
-        dateSpan.innerHTML = localeDate;
+        dateSpan.innerHTML = localeDow + " " + localeDate;
         timeSpan.innerHTML = localeTime;
       }
       updateDateTime();

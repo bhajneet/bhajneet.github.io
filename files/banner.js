@@ -4,14 +4,14 @@
 
 var customBannerItems = ["", "", ""];
 
-var customIsBanner = true;
+var showBanner = true;
 
 // Do not touch anything below this line unless you know what you're doing
 
 var isBanner =
   params.has("minimal") && params.get("minimal") === "true"
     ? false
-    : customIsBanner;
+    : showBanner;
 
 var bannerItems = params.has("banner")
   ? params.getAll("banner")

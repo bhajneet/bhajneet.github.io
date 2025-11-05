@@ -359,6 +359,32 @@
       </li>
     </ul>
 
+    <h2>Zoom level</h2>
+    <p>
+      Update the zoom level of the overlay or shabad os overlays using a decimal
+      factor for size percentage.
+    </p>
+    <ul>
+      <li>
+        Update the
+        <code>theme.js</code> file's <code>customZoom</code> to your desired
+        zoom level. For 125% zoom, set it to <code>1.25</code>; for 150% zoom,
+        set it to <code>1.5</code>.
+      </li>
+      <li>
+        Similarly update your shabad os <code>.css</code> file's zoom level by
+        editing the <code>--zoom: 1;</code> to your desired zoom level (e.g
+        <code>--zoom: 1.5;</code> for 150% zoom).
+      </li>
+      <li>
+        In the shabad os <code>.css</code> file, there is also a secondary zoom
+        factor for translations. By default they are set to 60% of the gurbani
+        size. To make translations half the size of gurbani set
+        <code>--secondary-scale-factor: 0.6;</code> to
+        <code>--secondary-scale-factor: 0.5;</code>.
+      </li>
+    </ul>
+
     <h2>Live stream from mobile devices with URL Parameters</h2>
     <p>
       URL parameters can be added to the end of the URL. This lets you use this
@@ -392,6 +418,10 @@
         light or classic).
       </li>
       <li><code>minimal=true</code> - Use the minimal / compact style.</li>
+      <li>
+        <code>zoom=1.0</code> - Choose a zoom level (e.g 1.0 is 100% and 2.0 is
+        200%).
+      </li>
     </ul>
   </body>
 </html>

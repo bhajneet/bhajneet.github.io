@@ -11,10 +11,10 @@
       :root {
         --hud-distance: 1em;
         --hud-row-height: 2.4em;
-        --logo-width: calc(var(--hud-row-height) * 0.75 * 0.8617580022);
-        --screen-padding: 5vw;
+        --logo-width: calc(var(--hud-row-height) * 2 * 0.8617580022 * 0.85);
+        --screen-padding: calc(5vw / var(--zoom));
         --animation-duration: 1.25s;
-        --translate-length: 10.4px;
+        --translate-length: 0.57em;
       }
       body {
         margin: 0;
@@ -22,9 +22,9 @@
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
           "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
           "Helvetica Neue", Arial, sans-serif;
-        font-size: 1.46vw;
+        font-size: calc(1.46vw * var(--zoom));
         font-weight: 500;
-        line-height: 1.3;
+        line-height: 1.36;
       }
       footer {
         width: 100%;
@@ -46,11 +46,12 @@
         align-items: center;
         padding-top: 0.3vw;
         padding-right: 1.8vw;
-        padding-left: 5vw;
+        padding-left: var(--screen-padding);
         max-height: calc(var(--hud-row-height) * 2);
       }
-      svg {
+      #left > svg {
         color: var(--logo-color);
+        width: var(--logo-width) !important;
       }
       #left,
       #topbar {
@@ -69,6 +70,7 @@
         display: flex;
         align-items: center;
         height: var(--hud-row-height);
+        overflow: clip;
       }
       #title > .separator {
         margin-right: 0.4em;
@@ -80,7 +82,10 @@
         padding-right: var(--screen-padding);
       }
       #datetime {
+        max-width: 33vw;
         gap: 0.2em;
+        text-align: center;
+        justify-content: flex-end;
       }
       #banner {
         position: relative;
@@ -126,6 +131,7 @@
       span.separator {
         --size: 1.2em;
         width: var(--size);
+        min-width: var(--size);
         height: 1.2em;
         background-color: var(--primary-accent-color);
         clip-path: polygon(
@@ -156,6 +162,7 @@
       .nb #datetime {
         gap: 0.9em;
         opacity: 0.65;
+        max-width: none;
       }
       .nb footer {
         display: flex;

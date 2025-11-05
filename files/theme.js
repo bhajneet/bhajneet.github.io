@@ -1,7 +1,9 @@
 // can change to "light", "dark", "classic", etc
 var customTheme = "dark";
+var customZoom = 1.0;
 
 var theme = params.has("theme") ? params.get("theme") : customTheme;
+var zoom = params.has("zoom") ? parseFloat(params.get("zoom")) : customZoom;
 
 // hexadecimal color code for transparency
 // https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
@@ -47,6 +49,7 @@ var themes = {
 
 var root = document.querySelector(":root");
 
+root.style.setProperty("--zoom", zoom.toString());
 root.style.setProperty("--logo-color", themes[theme].logo);
 root.style.setProperty("--primary", themes[theme].fg1);
 root.style.setProperty("--secondary", themes[theme].fg2);

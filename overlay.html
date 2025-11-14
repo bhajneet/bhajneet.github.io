@@ -10,8 +10,8 @@
     <style>
       :root {
         --hud-distance: 1em;
-        --hud-row-height: 2.4em;
-        --logo-width: calc(var(--hud-row-height) * 2 * 0.8617580022 * 0.85);
+        --hud-row-height: 2.8em;
+        --logo-width: calc(var(--hud-row-height) * 2 * 0.8617580022 * 0.965);
         --screen-padding: calc(5vw / var(--zoom));
         --animation-duration: 1.25s;
         --translate-length: 0.57em;
@@ -44,21 +44,21 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        padding-top: 0.3vw;
-        padding-right: 1.8vw;
+        padding-right: 1.1875em;
         padding-left: var(--screen-padding);
         max-height: calc(var(--hud-row-height) * 2);
       }
       #left > svg {
         color: var(--logo-color);
         width: var(--logo-width) !important;
+        padding-bottom: calc(1px);
       }
       #left,
       #topbar {
         background: var(--primary-banner-color);
         color: var(--primary);
         position: relative;
-        top: 1px;
+        top: 0.5px;
       }
       #banner {
         background: var(--secondary-banner-color);
@@ -132,7 +132,7 @@
         --size: 1.2em;
         width: var(--size);
         min-width: var(--size);
-        height: 1.2em;
+        height: 1.4em;
         background-color: var(--primary-accent-color);
         clip-path: polygon(
           calc(var(--size) * 0.4) 0%,

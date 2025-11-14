@@ -30,7 +30,7 @@ var themes = {
   cinematic: {
     logo: "#dedede",
     fg1: "#eeeeee",
-    fg2: "#bebebe",
+    fg2: "#d0d0d0",
     bg1: "#000000",
     bg2: "#2e2e2e",
     accent1: "#ffd22b",

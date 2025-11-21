@@ -1,10 +1,12 @@
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       :root {
         color-scheme: light dark;
 
-        --fg: light-dark(#23211f, #ffffff);
+        --fg: light-dark(#000, #ffffff);
+        --fg-muted: light-dark(#808080, #aaaaaa);
         --fg-header: light-dark(#282550, #cfbd95);
 
         --bg: light-dark(#f5f2ea, #282e4e);
@@ -22,7 +24,7 @@
       }
       * {
         margin: 0;
-        line-height: 1.5;
+        line-height: 1.6;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
           "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
           "Helvetica Neue", Arial, sans-serif;
@@ -81,7 +83,11 @@
         appearance: none;
       }
       code {
+        font-weight: 500;
+      }
+      .form code {
         overflow-wrap: anywhere;
+        font-weight: 400;
       }
       .form,
       .form * {
@@ -92,7 +98,7 @@
         cursor: pointer;
         outline: inherit;
         font-size: 16px;
-        line-height: 47px;
+        line-height: 48px;
         text-align: left;
         box-sizing: border-box;
         user-select: none;
@@ -103,17 +109,17 @@
       }
       .form {
         width: 100%;
-        /* max-width: 640px; */
         display: grid;
         grid-template-columns: 200px 1fr;
         background: var(--bg-glass);
-        border: 0.5px solid var(--bg-glass);
         border-radius: 0.75em;
         padding: 0 1em;
       }
+      .form * {
+        min-height: 48px;
+      }
       .form:hover {
         background: var(--bg-base);
-        border: 0.5px solid var(--bg-base);
       }
       .form + .form {
         margin-top: 0.75em;
@@ -123,14 +129,38 @@
         opacity: 0.5;
       }
       @media (pointer: coarse) {
+        *,
+        *:hover,
+        *:active,
+        *:focus,
+        *:active:focus {
+          outline: none;
+          box-shadow: none;
+          -webkit-tap-highlight-color: transparent;
+          -ms-touch-action: manipulation;
+          touch-action: manipulation;
+        }
+        .form:hover {
+          background: var(--bg-glass);
+        }
         body {
           max-width: none;
           padding: 0 24px;
         }
-        .form,
+        .form {
+          grid-template-columns: 1fr;
+          padding: 8px 16px;
+        }
+        .form > *,
         .form * {
-          font-size: 24px;
-          line-height: 71px;
+          line-height: 24px;
+          min-height: 24px;
+        }
+        .form > :first-child,
+        .form > :first-child * {
+          color: var(--fg-muted);
+          font-size: 12px;
+          font-weight: 500;
         }
       }
     </style>
@@ -430,12 +460,7 @@
       "Properties for 'AKJ Overlay'" window:
     </p>
     <ul>
-      <li>
-        Paste the link for the AKJ Live Stream Overlay in the <b>URL</b> box.
-        Alternatively, enable the checkbox for <b>Local file</b>, then click on
-        <b>Browse</b>, and point it to the <b><code>overlay.html</code></b> file
-        in this folder.
-      </li>
+      <li>Paste the "Generated URL" link in the <b>URL</b> box.</li>
       <li>
         Set the <b>Width</b> and <b>Height</b> to your livestream's resolution
         (e.g. 1280x720, 1920x1080, 3840x2160)
@@ -444,13 +469,15 @@
     </ul>
 
     <h2>Add gurbani captioning with Shabad OS</h2>
+    <p>Download Presenter:</p>
     <ul>
       <li>
-        Get Shabad OS Presenter for desktop:
         <a target="_blank" href="https://www.shabados.com">www.shabados.com</a>
       </li>
+    </ul>
+    <p>Then follow this guide:</p>
+    <ul>
       <li>
-        Follow the guide:
         <a
           target="_blank"
           href="https://www.shabados.com/support/add-bani-captions-to-a-live-stream"
@@ -459,27 +486,21 @@
       </li>
     </ul>
 
-    <h2>Match the overlay theme in Shabad OS</h2>
+    <h2>Match the overlay themes</h2>
+    <p><b>Theme Colors</b></p>
     <p>
-      The AKJ "Cinematic" theme is meant to match the Shabad OS overlay with the
-      same name. If you want to use a different theme for the AKJ overlay,
-      follow these instructions to match them in Shabad OS.
+      By default, the AKJ Cinematic theme matches the built-in Cinematic theme
+      in Shabad OS. This is the easiest way to match themes.
     </p>
-    <ul>
-      <li>
-        See the css files in the "shabad os" folder for the following guide:
-        <a
-          target="_blank"
-          href="https://www.shabados.com/support/import-an-overlay-theme"
-          >www.shabados.com/support/import-an-overlay-theme</a
-        >
-      </li>
-      <li>
-        Move said files to the folder location of Shabad OS overlay themes.
-      </li>
-      <li>Select the matching theme in Shabad OS.</li>
-    </ul>
-    <p>Top bar themes (Right-click > "Save Link As...")</p>
+    <p>
+      Nothing extra is required, aside from choosing the Cinematic theme on this
+      website and in Shabad OS.
+    </p>
+    <p>
+      Instead, if you want to use a custom AKJ theme, then please use one of the
+      custom Shabad OS themes to match it.
+    </p>
+    <p>Right-click > "Save Link As..."</p>
     <ul>
       <li>
         <a href="shabad os/AKJ Dark.css" target="_blank" download
@@ -497,14 +518,6 @@
         >
       </li>
     </ul>
-
-    <h2>Minimal / compact mode</h2>
-    <ul>
-      <li>This mode uses a dynamic width without a banner.</li>
-      <li>It only contains the logo, the title, and the date & time.</li>
-      <li>The Shabad OS overlays listed below will also take up less space.</li>
-    </ul>
-    <p>Minimal themes (Right-click > "Save Link As...")</p>
     <ul>
       <li>
         <a href="shabad os/AKJ Minimal Dark.css" target="_blank" download
@@ -522,53 +535,40 @@
         >
       </li>
     </ul>
-
-    <h2>Zoom level</h2>
+    <p>Use any of the above theme files in the following guide:</p>
+    <ul>
+      <li>
+        <a
+          target="_blank"
+          href="https://www.shabados.com/support/import-an-overlay-theme"
+          >www.shabados.com/support/import-an-overlay-theme</a
+        >
+      </li>
+      <li>
+        Move any theme files to the folder location of Shabad OS overlay themes.
+      </li>
+      <li>Select the matching theme in Shabad OS.</li>
+    </ul>
+    <p><b>Zoom Levels</b></p>
     <p>
-      Update the zoom level of the overlay or shabad os overlays using a decimal
-      factor for size percentage.
+      You can match the zoom level of the AKJ overlay with the Shabad OS overlay
+      using a decimal factor for size percentage. Use a text-editor to open the
+      Shabad OS <code>.css</code> file.
     </p>
     <ul>
       <li>
-        Update your shabad os <code>.css</code> file's zoom level by editing the
-        <code>--zoom: 1;</code> to your desired zoom level (e.g
-        <code>--zoom: 1.5;</code> for 150% zoom).
+        Update zoom level by editing the
+        <code>--zoom: 1;</code> to your desired zoom level.
+      </li>
+      <li>For example, use <code>--zoom: 1.5;</code> for 150% zoom.</li>
+      <li>
+        There is also a secondary zoom factor for translations. By default they
+        are set to 60% of the gurbani size.
       </li>
       <li>
-        In the shabad os <code>.css</code> file, there is also a secondary zoom
-        factor for translations. By default they are set to 60% of the gurbani
-        size. To make translations half the size of gurbani set
-        <code>--secondary-scale-factor: 0.6;</code> to
-        <code>--secondary-scale-factor: 0.5;</code>.
+        For example, use <code>--secondary-scale-factor: 0.5;</code> for 50%.
       </li>
     </ul>
-
-    <!-- <h2>Manually edit the URL</h2>
-    <p>
-      The browser will automatically convert spaces to <code>%20</code>, which
-      is the URL code for a space. So "AKJ Smagam" will become
-      <code>AKJ%20Smagam</code>. This is not a problem.
-    </p>
-    <p>Here is a list of different URL parameters:</p>
-    <ul>
-      <li>
-        <code>title=Your Custom Title</code> - Set a custom title for the
-        overlay.
-      </li>
-      <li>
-        <code>banner=Your Custom Banner&banner=another banner item</code> - Set
-        a custom banner for the overlay.
-      </li>
-      <li>
-        <code>theme=dark</code> - Set the theme of the overlay (can also choose
-        light or classic).
-      </li>
-      <li><code>minimal=true</code> - Use the minimal / compact style.</li>
-      <li>
-        <code>zoom=1.0</code> - Choose a zoom level (e.g 1.0 is 100% and 2.0 is
-        200%).
-      </li>
-    </ul> -->
   </body>
 
   <script>

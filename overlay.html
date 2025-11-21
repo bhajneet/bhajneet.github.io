@@ -145,9 +145,13 @@
 
       /* banner disabled design */
       .nb {
-        --screen-padding: 1.8em;
-        --hud-row-height: 1.8em;
-        /* font-size: 0.875em; */
+        --hud-row-height: 1.95em;
+        --logo-width: calc(var(--hud-row-height) * 2 * 0.8617580022 * 1);
+      }
+      .nb footer {
+        display: flex;
+        justify-content: center;
+        padding-bottom: calc(var(--hud-row-height) * 1.5);
       }
       .nb #banner {
         display: none;
@@ -160,16 +164,12 @@
         opacity: 0.85;
       }
       .nb #datetime {
-        gap: 0.9em;
+        gap: 0.8em;
         opacity: 0.65;
         max-width: none;
       }
-      .nb footer {
-        display: flex;
-        justify-content: center;
-        padding-bottom: calc(var(--screen-padding) * 0.4);
-      }
       .nb #topbar {
+        padding-right: var(--hud-row-height);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -178,17 +178,19 @@
       }
       .nb #left,
       .nb #topbar {
-        padding-top: 0.4em;
-        padding-bottom: 0.4em;
+        --y-padding: calc(var(--hud-row-height) * 0.375);
+        --x-padding: calc(var(--hud-row-height) * 0.6);
+        padding-top: var(--y-padding);
+        padding-bottom: var(--y-padding);
       }
       .nb #left {
         clip-path: none;
-        border-radius: 2.5em 0 0 2.5em;
-        padding-left: 0.9em;
-        padding-right: 1em;
+        border-radius: 100vh 0 0 100vh;
+        padding-left: var(--x-padding);
+        padding-right: var(--x-padding);
       }
       .nb #topbar {
-        border-radius: 0 2.5em 2.5em 0;
+        border-radius: 0 100vh 100vh 0;
       }
 
       @keyframes slidein {
@@ -432,9 +434,12 @@
         document.body.classList.add("nb");
       }
 
+      var regexPattern = new RegExp(`[\(]*LIVE[\): ]*`, "gi");
       var el = document.createElement("span");
       el.classList.add("separator");
-      document.getElementById("title").innerHTML = `${el.outerHTML} ${title}`;
+      document.getElementById("title").innerHTML = `${el.outerHTML} ${title
+        .replaceAll(regexPattern, "")
+        .trim()}`;
 
       // get banner
       var banner = document.getElementById("banner");
@@ -443,9 +448,7 @@
       bannerItems = [
         ...bannerItems,
         "Visit www.AKJ.org for recordings, literature, and more",
-        "Subscribe to the AKJ.Org YouTube channel: https://www.youtube.com/akjdotorg",
-        "Follow AKJ on Facebook: https://www.facebook.com/AkhandKeertaneeJathaa",
-        "Follow @AKJdotOrg on Instagram",
+        "Subscribe to the AKJ.Org YouTube channel: www.youtube.com/akjdotorg",
       ];
       bannerItems.map((item) => {
         if (item.length < 1) {
@@ -460,20 +463,22 @@
       var bannerDivs = banner.getElementsByTagName("div");
       var numBannerDivs = bannerDivs.length;
       bannerDivs[0].classList.add("show");
-      bannerDivs[numBannerDivs - 1].classList.add("gone");
-      setInterval(function () {
-        // get currently active banner item and figure out next one
-        var current = document.getElementsByClassName("show")[0];
-        var next = current.nextSibling;
-        if (!next) {
-          next = bannerDivs[0];
-        }
+      if (numBannerDivs > 1) {
+        bannerDivs[numBannerDivs - 1].classList.add("gone");
+        setInterval(function () {
+          // get currently active banner item and figure out next one
+          var current = document.getElementsByClassName("show")[0];
+          var next = current.nextSibling;
+          if (!next) {
+            next = bannerDivs[0];
+          }
 
-        // rotate classlist of items
-        document.getElementsByClassName("gone")[0].classList.remove("gone");
-        current.classList.replace("show", "gone");
-        next.classList.add("show");
-      }, 12500);
+          // rotate classlist of items
+          document.getElementsByClassName("gone")[0].classList.remove("gone");
+          current.classList.replace("show", "gone");
+          next.classList.add("show");
+        }, 12500);
+      }
 
       // update date time
       var dateSpan = document.getElementById("date");

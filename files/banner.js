@@ -1,12 +1,34 @@
-// Fill in custom banner items here between double quotes
-// The usual banner items are automatically added
-// E.g. "Visit www.AKJ.org for recordings, literature, and more"
+// Add any custom banner items in double quotes.
+//
+// Default banner items are added automatically.
+//
+// For example, "Visit www.AKJ.org for recordings, literature, and more"
+// will show by default and does not need to be added here.
 
-var customBannerItems = ["", "", ""];
+var customBannerItems = [
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+];
 
 var showBanner = true;
 
-// Do not touch anything below this line unless you know what you're doing
+//
+//
+// Do not edit anything below this line, unless you know what you're doing
+//
+//
 
 var isBanner =
   params.has("minimal") && params.get("minimal") === "true"

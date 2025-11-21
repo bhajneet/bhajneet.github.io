@@ -1,32 +1,27 @@
-// can change to "light", "dark", "classic", etc
-var customTheme = "dark";
+// can change defaultTheme to
+// "cinematic"(default black theme)
+// "classic"(blue theme)
+// "dark" (dark gray theme)
+// "light"(light theme)
+
+var defaultTheme = "cinematic";
+
+// can change customZoom to adjust default zoom level
+// 1.0 = 100% (default zoom level)
+// 1.25 = 125%
+
 var customZoom = 1.0;
 
-var theme = params.has("theme") ? params.get("theme") : customTheme;
+//
+//
+// Do not edit anything below this line, unless you know what you're doing
+//
+//
+
+var theme = params.has("theme") ? params.get("theme") : defaultTheme;
 var zoom = params.has("zoom") ? parseFloat(params.get("zoom")) : customZoom;
 
-// hexadecimal color code for transparency
-// https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
-
 var themes = {
-  light: {
-    logo: "#282550",
-    fg1: "#000000cc",
-    fg2: "#000000cc",
-    bg1: "#f5f2eaeb",
-    bg2: "#dededeeb",
-    accent1: "#d6caad",
-    accent2: "#979799",
-  },
-  dark: {
-    logo: "#e3e3eb",
-    fg1: "#ffffff",
-    fg2: "#000000",
-    bg1: "#242424eb",
-    bg2: "#ddddddeb",
-    accent1: "#ffd22b",
-    accent2: "#ffffff",
-  },
   cinematic: {
     logo: "#dedede",
     fg1: "#eeeeee",
@@ -44,6 +39,24 @@ var themes = {
     bg2: "#ffd22beb",
     accent1: "#ffd22b",
     accent2: "#ffffff",
+  },
+  dark: {
+    logo: "#e3e3eb",
+    fg1: "#ffffff",
+    fg2: "#000000",
+    bg1: "#242424eb",
+    bg2: "#ddddddeb",
+    accent1: "#ffd22b",
+    accent2: "#ffffff",
+  },
+  light: {
+    logo: "#282550",
+    fg1: "#000000cc",
+    fg2: "#000000cc",
+    bg1: "#f5f2eaeb",
+    bg2: "#dededeeb",
+    accent1: "#d6caad",
+    accent2: "#979799",
   },
 };
 

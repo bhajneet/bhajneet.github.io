@@ -1,32 +1,137 @@
 <html>
   <head>
     <style>
+      :root {
+        color-scheme: light dark;
+
+        --fg: light-dark(#23211f, #ffffff);
+        --fg-header: light-dark(#282550, #cfbd95);
+
+        --bg: light-dark(#f5f2ea, #282e4e);
+        --bg-base: light-dark(rgb(100% 100% 100%), rgb(13% 13% 13%));
+        --bg-glass: light-dark(
+          rgba(100% 100% 100% / 0.6),
+          rgba(13% 13% 13% / 0.6)
+        );
+
+        --ui: light-dark(#282550, #cfbd95);
+        --ui-toner: light-dark(#f2f7fe, #113760);
+
+        --link: light-dark(#3273f6, #a1c5fa);
+        --link-hover: light-dark(#285bc0, #d4e5fc);
+      }
+      * {
+        margin: 0;
+        line-height: 1.5;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+          "Helvetica Neue", Arial, sans-serif;
+        color: var(--fg);
+        accent-color: var(--link);
+      }
       body {
         margin: 3em auto;
         padding: 0;
         max-width: 45rem;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-          "Helvetica Neue", Arial, sans-serif;
-        line-height: 1.5;
+        background: var(--bg);
       }
-      * {
-        margin: 0;
+      body > *,
+      .layout > * {
+        display: block;
+        margin-bottom: 0.75em !important;
       }
-      body > * {
-        margin-bottom: 0.75em;
+      script {
+        display: none;
       }
       h1,
       h2 {
         margin-top: 1.5em;
       }
-      a {
-        color: #403885;
+      h1,
+      h2,
+      svg * {
+        color: var(--fg-header);
+      }
+      a,
+      .link {
+        color: var(--link);
         text-decoration: none;
         font-weight: 500;
       }
-      a:hover {
-        color: #5a54a5;
+      a:hover,
+      .link:hover {
+        color: var(--link-hover);
+      }
+      #link-generator {
+        display: none;
+        user-select: none;
+        -webkit-user-select: none;
+        cursor: default;
+      }
+      input:active,
+      input:focus,
+      textarea:active,
+      textarea:focus {
+        cursor: text;
+      }
+      textarea {
+        resize: vertical;
+      }
+      select {
+        appearance: none;
+      }
+      code {
+        overflow-wrap: anywhere;
+      }
+      .form,
+      .form * {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background: none;
+        cursor: pointer;
+        outline: inherit;
+        font-size: 16px;
+        line-height: 47px;
+        text-align: left;
+        box-sizing: border-box;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-user-drag: none;
+        touch-action: none;
+        transition: all 40ms ease-in-out;
+      }
+      .form {
+        width: 100%;
+        /* max-width: 640px; */
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        background: var(--bg-glass);
+        border: 0.5px solid var(--bg-glass);
+        border-radius: 0.75em;
+        padding: 0 1em;
+      }
+      .form:hover {
+        background: var(--bg-base);
+        border: 0.5px solid var(--bg-base);
+      }
+      .form + .form {
+        margin-top: 0.75em;
+      }
+      .highlight {
+        font-size: 1.15em;
+        opacity: 0.5;
+      }
+      @media (pointer: coarse) {
+        body {
+          max-width: none;
+          padding: 0 24px;
+        }
+        .form,
+        .form * {
+          font-size: 24px;
+          line-height: 71px;
+        }
       }
     </style>
   </head>
@@ -74,24 +179,24 @@
       <defs id="defs2">
         <linearGradient id="linearGradient6" inkscape:collect="always">
           <stop
-            style="stop-color: #282550; stop-opacity: 1"
+            style="stop-color: currentColor; stop-opacity: 1"
             offset="0"
             id="stop6"
           />
           <stop
-            style="stop-color: #282550; stop-opacity: 0.85000002"
+            style="stop-color: currentColor; stop-opacity: 0.85"
             offset="1"
             id="stop7"
           />
         </linearGradient>
         <linearGradient id="linearGradient3" inkscape:collect="always">
           <stop
-            style="stop-color: #282550; stop-opacity: 1"
+            style="stop-color: currentColor; stop-opacity: 1"
             offset="0"
             id="stop3"
           />
           <stop
-            style="stop-color: #282550; stop-opacity: 0.85000002"
+            style="stop-color: currentColor; stop-opacity: 0.85"
             offset="1"
             id="stop4"
           />
@@ -155,7 +260,7 @@
         <path
           style="
             display: inline;
-            fill: #282550;
+            fill: currentColor;
             fill-opacity: 1;
             stroke: none;
             stroke-width: 0.8;
@@ -171,7 +276,7 @@
         <path
           style="
             display: inline;
-            fill: #282550;
+            fill: currentColor;
             fill-opacity: 1;
             stroke: none;
             stroke-width: 0.8;
@@ -215,10 +320,101 @@
       </g>
     </svg>
 
-    <h1>AKJ.Org - Live Stream Instructions</h1>
-    <a href="overlay.html"
-      ><p>Click here to see the live stream overlay ></p></a
-    >
+    <h1>AKJ.Org - Live Stream Overlay</h1>
+
+    <div id="link-generator" class="layout">
+      <div class="form">
+        <label for="title">Title</label>
+        <input id="title" placeholder="Title" value="Akhand Keertan Smaagam" />
+      </div>
+      <div class="form">
+        <label for="zoom">Zoom <span id="zoom-legend">100</span>%</label>
+        <input
+          type="range"
+          id="zoom"
+          min="0.5"
+          max="2.5"
+          value="1.0"
+          step="0.05"
+        />
+      </div>
+      <div class="form" id="theme-area">
+        <label for="theme">Theme</label>
+        <select id="theme">
+          <option value="cinematic" selected>Cinematic</option>
+          <option value="classic">Classic</option>
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
+      </div>
+      <button class="form" id="minimal-area">
+        <label>Minimal Layout</label>
+        <span>Off</span>
+      </button>
+      <div class="form">
+        <label for="banner">Custom Banner Items</label>
+        <textarea
+          id="banner"
+          rows="3"
+          cols="72"
+          placeholder="Add banner items here (separate by new lines)"
+        ></textarea>
+      </div>
+      <h2>Generated URL</h2>
+      <button class="form" id="codebox-area">
+        <span id="codebox-hint">Click to copy</span>
+        <code id="codebox"></code>
+      </button>
+      <a href="overlay.html" target="_blank" id="preview"
+        ><button class="form">
+          <span>Preview</span><span class="link">Open in new tab</span>
+        </button>
+      </a>
+    </div>
+
+    <h2>Live stream from a mobile device</h2>
+    <p>
+      Get <b>Streamlabs</b> (<a
+        href="https://apps.apple.com/us/app/streamlabs-live-streaming-app/id1294578643"
+        target="_blank"
+        >iOS</a
+      >
+      or
+      <a
+        href="https://play.google.com/store/apps/details?id=com.streamlabs&hl=en_US"
+        target="_blank"
+        >Android</a
+      >). There are separate scenes for portrait and landscape modes. Make sure
+      the phone is correctly in landscape orientation before continuing.
+    </p>
+    <ul>
+      <li>Open Streamlabs in landscape orientation.</li>
+      <li>
+        At the top right, select the <b>rectangle</b> icon to open the "Scene
+        Switcher"
+      </li>
+      <li>Select the <b>pencil</b> icon to open the editor.</li>
+      <li>
+        At the top right, select <b>Layers</b>, then select the
+        <b>+ (plus)</b> icon.
+      </li>
+      <li><b>Add a custom item</b> > <b>Add a URL</b></li>
+    </ul>
+    <p>
+      Make sure to not select the "back arrow" icon or "x" icon to close this
+      screen.
+    </p>
+    <ul>
+      <li>Paste the URL that was generated from this page</li>
+      <li>Hide the keyboard by selecting the <b>enter</b> key</li>
+      <li>With the keyboard hidden, select <b>Add</b></li>
+      <li>
+        Drag the box to the corner and then drag the opposite corner to fill the
+        screen.
+      </li>
+      <li>Select <b>Save</b> at the top left</li>
+      <li>Tap outside the "Scene Switcher" modal to close it.</li>
+    </ul>
 
     <h2>Add the overlay to OBS</h2>
     <ul>
@@ -247,46 +443,14 @@
       <li>Click <b>OK</b>.</li>
     </ul>
 
-    <h2>Configure the Title, Banner, and Theme of the Live Stream</h2>
+    <h2>Add gurbani captioning with Shabad OS</h2>
     <ul>
       <li>
-        In the <b><code>files</code></b> folder, right-click the file and open
-        with a text editor like Notepad.
-      </li>
-      <ul>
-        <li>For title: Add / Modify the custom title between double quotes.</li>
-        <li>
-          For banner: Add / Modify lines between double quotes and separate with
-          commas.
-        </li>
-        <li>
-          For theme: Modify the custom theme between double quotes to "light",
-          "dark", or "classic" (and update the theme to match in Shabad OS as
-          well)
-        </li>
-      </ul>
-      <li>Save the file and refresh the overlay in OBS.</li>
-    </ul>
-    <p>
-      When changes are made, the overlay needs to be refreshed to reflect the
-      updates. Instead of restarting OBS, do the following:
-    </p>
-    <ul>
-      <li>Double-click <b>AKJ Overlay</b> in the Sources panel.</li>
-      <li>
-        Scroll down to the bottom, and click
-        <b>Refresh cache of current page</b>.
-      </li>
-    </ul>
-
-    <h2>Add gurbani captioning</h2>
-    <ul>
-      <li>
-        Use software such as Shabad OS Presenter to add captions:
+        Get Shabad OS Presenter for desktop:
         <a target="_blank" href="https://www.shabados.com">www.shabados.com</a>
       </li>
       <li>
-        Follow guide to set up:
+        Follow the guide:
         <a
           target="_blank"
           href="https://www.shabados.com/support/add-bani-captions-to-a-live-stream"
@@ -296,6 +460,11 @@
     </ul>
 
     <h2>Match the overlay theme in Shabad OS</h2>
+    <p>
+      The AKJ "Cinematic" theme is meant to match the Shabad OS overlay with the
+      same name. If you want to use a different theme for the AKJ overlay,
+      follow these instructions to match them in Shabad OS.
+    </p>
     <ul>
       <li>
         See the css files in the "shabad os" folder for the following guide:
@@ -331,11 +500,6 @@
 
     <h2>Minimal / compact mode</h2>
     <ul>
-      <li>
-        Update the
-        <code>banner.js</code> file's <code>customIsBanner</code> to be equal to
-        <code>false</code>.
-      </li>
       <li>This mode uses a dynamic width without a banner.</li>
       <li>It only contains the logo, the title, and the date & time.</li>
       <li>The Shabad OS overlays listed below will also take up less space.</li>
@@ -366,14 +530,8 @@
     </p>
     <ul>
       <li>
-        Update the
-        <code>theme.js</code> file's <code>customZoom</code> to your desired
-        zoom level. For 125% zoom, set it to <code>1.25</code>; for 150% zoom,
-        set it to <code>1.5</code>.
-      </li>
-      <li>
-        Similarly update your shabad os <code>.css</code> file's zoom level by
-        editing the <code>--zoom: 1;</code> to your desired zoom level (e.g
+        Update your shabad os <code>.css</code> file's zoom level by editing the
+        <code>--zoom: 1;</code> to your desired zoom level (e.g
         <code>--zoom: 1.5;</code> for 150% zoom).
       </li>
       <li>
@@ -385,19 +543,7 @@
       </li>
     </ul>
 
-    <h2>Live stream from mobile devices with URL Parameters</h2>
-    <p>
-      URL parameters can be added to the end of the URL. This lets you use this
-      overlay without downloading the files. The first parameter always follows
-      a
-      <code>?</code> and all subsequent paramters are joined with an
-      <code>&</code>. For example, to set a custom title and theme you would add
-      to the end of the URL either of the following:
-    </p>
-    <ul>
-      <li><code>?title=AKJ Smagam&theme=classic</code></li>
-      <li><code>?theme=classic&title=AKJ Smagam</code></li>
-    </ul>
+    <!-- <h2>Manually edit the URL</h2>
     <p>
       The browser will automatically convert spaces to <code>%20</code>, which
       is the URL code for a space. So "AKJ Smagam" will become
@@ -422,6 +568,206 @@
         <code>zoom=1.0</code> - Choose a zoom level (e.g 1.0 is 100% and 2.0 is
         200%).
       </li>
-    </ul>
+    </ul> -->
   </body>
+
+  <script>
+    // quick check to see javascript is enabled
+    var generator = document.getElementById("link-generator");
+    generator.style.display = "block";
+
+    var title = document.getElementById("title");
+    var zoom = document.getElementById("zoom");
+    var zoomLegend = document.getElementById("zoom-legend");
+    var themeArea = document.getElementById("theme-area");
+    var theme = document.getElementById("theme");
+
+    var minimalArea = document.getElementById("minimal-area");
+    var minimal = false;
+    var banner = document.getElementById("banner");
+
+    var preview = document.getElementById("preview");
+    var codeboxArea = document.getElementById("codebox-area");
+    var codebox = document.getElementById("codebox");
+    var codeboxHint = document.getElementById("codebox-hint");
+
+    function updateLocalStorage() {
+      var json = {
+        title: title.value,
+        zoom: zoom.value,
+        theme: theme.value,
+        minimal: minimal,
+        banner: banner.value,
+      };
+      localStorage.setItem("akjOverlayGeneratorSettings", JSON.stringify(json));
+    }
+
+    function getLocalStorage() {
+      var json = localStorage.getItem("akjOverlayGeneratorSettings");
+      if (!json) {
+        return null;
+      }
+      try {
+        return JSON.parse(json);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function initializeFromLocalStorage() {
+      var settings = getLocalStorage();
+      if (!settings) {
+        return;
+      }
+      if (settings.title) {
+        title.value = settings.title;
+      }
+      if (settings.zoom) {
+        zoom.value = settings.zoom;
+        zoomLegend.innerText = Math.round(zoom.value * 100);
+      }
+      if (settings.theme) {
+        theme.value = settings.theme;
+      }
+      if (settings.minimal !== undefined) {
+        minimal = settings.minimal;
+        minimalArea.querySelector("span").innerText = minimal ? "On" : "Off";
+      }
+      if (settings.banner) {
+        banner.value = settings.banner;
+      }
+    }
+
+    function updateState() {
+      var url = new URL(
+        window.location.href.split("/").slice(0, -1).join("/") + "/overlay.html"
+      );
+
+      if (title.value && title.value.trim() !== "Akhand Keertan Smaagam") {
+        url.searchParams.set("title", title.value);
+      }
+
+      if (zoom.value !== "1") {
+        url.searchParams.set("zoom", zoom.value);
+      }
+
+      if (theme.value !== "cinematic") {
+        url.searchParams.set("theme", theme.value);
+      }
+
+      if (minimal) {
+        url.searchParams.set("minimal", "true");
+      }
+
+      var bannerLines = banner.value
+        .split("\n")
+        .map(function (line) {
+          return line.trim();
+        })
+        .filter(function (line) {
+          return line.length > 0;
+        });
+      bannerLines.forEach(function (line) {
+        url.searchParams.append("banner", line);
+      });
+
+      preview.href = url.toString();
+      codebox.innerText = url.toString();
+
+      updateLocalStorage();
+    }
+
+    initializeFromLocalStorage();
+    updateState();
+
+    title.addEventListener(
+      "input",
+      function () {
+        updateState();
+      },
+      false
+    );
+
+    zoom.addEventListener(
+      "input",
+      function () {
+        zoomLegend.innerText = Math.round(zoom.value * 100);
+        updateState();
+      },
+      false
+    );
+
+    themeArea.addEventListener(
+      "pointerdown",
+      function () {
+        theme.classList.add("highlight");
+        setTimeout(function () {
+          theme.classList.remove("highlight");
+        }, 200);
+      },
+      false
+    );
+
+    themeArea.addEventListener(
+      "pointerup",
+      function () {
+        theme.classList.remove("highlight");
+        // setTimeout(function () {
+        // theme.classList.add("highlight");
+        // }, 20);
+      },
+      false
+    );
+
+    theme.addEventListener(
+      "change",
+      function () {
+        updateState();
+      },
+      false
+    );
+
+    minimalArea.addEventListener(
+      "click",
+      function () {
+        minimal = !minimal;
+        minimalArea.querySelector("span").innerText = minimal ? "On" : "Off";
+        updateState();
+      },
+      false
+    );
+
+    banner.addEventListener(
+      "input",
+      function () {
+        updateState();
+      },
+      false
+    );
+
+    codeboxArea.addEventListener(
+      "click",
+      function () {
+        var url = codebox.innerText;
+        // copy to clipboard
+        navigator.clipboard.writeText(url).then(
+          function () {
+            // success
+            codeboxHint.innerText = "Copied!";
+            setTimeout(function () {
+              codeboxHint.innerText = "Click to copy";
+            }, 2000);
+          },
+          function () {
+            // rejection
+            codeboxHint.innerText = "Failed to copy";
+            setTimeout(function () {
+              codeboxHint.innerText = "Click to copy";
+            }, 2000);
+          }
+        );
+      },
+      false
+    );
+  </script>
 </html>

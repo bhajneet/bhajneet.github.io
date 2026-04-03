@@ -14,13 +14,16 @@
 
         --fg: light-dark(#000, #ffffff);
         --fg-muted: light-dark(#808080, #aaaaaa);
-        --fg-header: light-dark(#282550, #cfbd95);
+        --fg-header: light-dark(#3a3965, #cfbd95);
 
         --bg: light-dark(#f5f2ea, #282e4e);
-        --bg-base: light-dark(rgb(100% 100% 100%), rgb(13% 13% 13%));
+        --bg-base: light-dark(
+          rgb(100% 100% 100%),
+          rgba(100% 100% 100% / 0.125)
+        );
         --bg-glass: light-dark(
           rgba(100% 100% 100% / 0.6),
-          rgba(13% 13% 13% / 0.6)
+          rgba(100% 100% 100% / 0.06)
         );
 
         --ui: light-dark(#282550, #cfbd95);
@@ -32,9 +35,20 @@
       * {
         margin: 0;
         line-height: 1.6;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-          "Helvetica Neue", Arial, sans-serif;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          "Roboto",
+          "Oxygen",
+          "Ubuntu",
+          "Cantarell",
+          "Fira Sans",
+          "Droid Sans",
+          "Helvetica Neue",
+          Arial,
+          sans-serif;
         color: var(--fg);
         accent-color: var(--link);
       }
@@ -45,7 +59,8 @@
         background: var(--bg);
       }
       body > *,
-      .layout > * {
+      .layout > *,
+      .collapsible-content > * {
         display: block;
         margin-bottom: 0.75em !important;
       }
@@ -135,6 +150,45 @@
         font-size: 1.15em;
         opacity: 0.5;
       }
+      details summary,
+      details .collapsible-content {
+        background: var(--bg-glass);
+        border-radius: 0.75em;
+        overflow: hidden;
+      }
+      details summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75em 1em;
+        cursor: pointer;
+        font-weight: 500;
+        /* list-style: none; */
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        transition: background 40ms ease-in-out;
+      }
+      details summary:hover {
+        background: var(--bg-base);
+      }
+      details summary::after {
+        content: "";
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5' stroke='%23808080' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+          no-repeat center / contain;
+        flex-shrink: 0;
+        transform: rotate(-90deg);
+        transition: transform 200ms ease;
+      }
+      details[open] summary::after {
+        transform: rotate(-180deg);
+      }
+      details .collapsible-content {
+        padding: 0 1em 1em;
+      }
       @media (pointer: coarse) {
         *,
         *:hover,
@@ -149,6 +203,9 @@
         }
         .form:hover {
           background: var(--bg-glass);
+        }
+        details summary:hover {
+          background: transparent;
         }
         body {
           max-width: none;
@@ -427,7 +484,9 @@
       </a>
     </div>
 
-    <h2>Live stream from a mobile device</h2>
+    <h1>Readme Instructions</h1>
+
+    <h2>Live stream from mobile</h2>
     <p>
       Get <b>Streamlabs</b> (<a
         href="https://apps.apple.com/us/app/streamlabs-live-streaming-app/id1294578643"
@@ -442,158 +501,173 @@
       >). There are separate scenes for portrait and landscape modes. Make sure
       the phone is correctly in landscape orientation before continuing.
     </p>
-    <ul>
-      <li>Open Streamlabs in landscape orientation.</li>
-      <li>
-        At the top right, select the <b>rectangle</b> icon to open the "Scene
-        Switcher"
-      </li>
-      <li>Select the <b>pencil</b> icon to open the editor.</li>
-      <li>
-        At the top right, select <b>Layers</b>, then select the
-        <b>+ (plus)</b> icon.
-      </li>
-      <li><b>Add a custom item</b> > <b>Add a URL</b></li>
-    </ul>
-    <p>
-      Make sure to not select the "back arrow" icon or "x" icon to close this
-      screen.
-    </p>
-    <ul>
-      <li>Paste the URL that was generated from this page</li>
-      <li>Hide the keyboard by selecting the <b>enter</b> key</li>
-      <li>With the keyboard hidden, select <b>Add</b></li>
-      <li>
-        Drag the box to the corner and then drag the opposite corner to fill the
-        screen.
-      </li>
-      <li>Select <b>Save</b> at the top left</li>
-      <li>Tap outside the "Scene Switcher" modal to close it.</li>
-    </ul>
+    <details>
+      <summary>Set up Streamlabs</summary>
+      <div class="collapsible-content">
+        <ul>
+          <li>Open Streamlabs in landscape orientation.</li>
+          <li>
+            At the top right, select the <b>rectangle</b> icon to open the
+            "Scene Switcher"
+          </li>
+          <li>Select the <b>pencil</b> icon to open the editor.</li>
+          <li>
+            At the top right, select <b>Layers</b>, then select the
+            <b>+ (plus)</b> icon.
+          </li>
+          <li><b>Add a custom item</b> > <b>Add a URL</b></li>
+        </ul>
+        <p>
+          Make sure to not select the "back arrow" icon or "x" icon to close
+          this screen.
+        </p>
+        <ul>
+          <li>Paste the URL that was generated from this page</li>
+          <li>Hide the keyboard by selecting the <b>enter</b> key</li>
+          <li>With the keyboard hidden, select <b>Add</b></li>
+          <li>
+            Drag the box to the corner and then drag the opposite corner to fill
+            the screen.
+          </li>
+          <li>Select <b>Save</b> at the top left</li>
+          <li>Tap outside the "Scene Switcher" modal to close it.</li>
+        </ul>
+      </div>
+    </details>
 
-    <h2>Add the overlay to OBS</h2>
-    <ul>
-      <li>Click the <b>+</b> sign at the bottom of the Sources panel.</li>
-      <li>Select <b>Browser</b>.</li>
-      <li>
-        Change the name from "Browser" to "AKJ Overlay" and click
-        <b>OK</b>.
-      </li>
-    </ul>
+    <h2>Live stream from computer</h2>
     <p>
-      Double-click <b>AKJ Overlay</b> in the Sources panel. Then, in the
-      "Properties for 'AKJ Overlay'" window:
+      Get
+      <b>OBS</b>
+      for
+      <a href="https://obsproject.com/download" target="_blank"
+        >macOS, Windows, or Linux</a
+      >.
     </p>
-    <ul>
-      <li>Paste the "Generated URL" link in the <b>URL</b> box.</li>
-      <li>
-        Set the <b>Width</b> and <b>Height</b> to your livestream's resolution
-        (e.g. 1280x720, 1920x1080, 3840x2160)
-      </li>
-      <li>Click <b>OK</b>.</li>
-    </ul>
 
-    <h2>Add gurbani captioning with Shabad OS</h2>
-    <p>Download Presenter:</p>
-    <ul>
-      <li>
-        <a target="_blank" href="https://www.shabados.com">www.shabados.com</a>
-      </li>
-    </ul>
-    <p>Then follow this guide:</p>
-    <ul>
-      <li>
-        <a
-          target="_blank"
-          href="https://www.shabados.com/support/add-bani-captions-to-a-live-stream"
-          >www.shabados.com/support/add-bani-captions-to-a-live-stream</a
-        >
-      </li>
-    </ul>
+    <details>
+      <summary>Add overlay to OBS</summary>
+      <div class="collapsible-content">
+        <ul>
+          <li>Click the <b>+</b> sign at the bottom of the Sources panel.</li>
+          <li>Select <b>Browser</b>.</li>
+          <li>
+            Change the name from "Browser" to "AKJ Overlay" and click
+            <b>OK</b>.
+          </li>
+        </ul>
+        <p>
+          Double-click <b>AKJ Overlay</b> in the Sources panel. Then, in the
+          "Properties for 'AKJ Overlay'" window:
+        </p>
+        <ul>
+          <li>Paste the "Generated URL" link in the <b>URL</b> box.</li>
+          <li>
+            Set the <b>Width</b> and <b>Height</b> to your livestream's
+            resolution (e.g. 1280x720, 1920x1080, 3840x2160)
+          </li>
+          <li>Click <b>OK</b>.</li>
+        </ul>
+      </div>
+    </details>
+
+    <h2>Add gurbani captions</h2>
+    <p>
+      Get <b>Presenter</b> (<a target="_blank" href="https://www.shabados.com"
+        >shabados.com</a
+      >). Follow guide to
+      <a
+        target="_blank"
+        href="https://www.shabados.com/support/add-bani-captions-to-a-live-stream"
+        >add bani captions to a live stream</a
+      >
+    </p>
 
     <h2>Match the overlay themes</h2>
-    <p><b>Theme Colors</b></p>
     <p>
-      By default, the AKJ Cinematic theme matches the built-in Cinematic theme
-      in Shabad OS. This is the easiest way to match themes.
+      There is already a matching Shabad OS theme for the default AKJ theme. In
+      Shabad OS, simply select the Cinematic theme as well.
     </p>
-    <p>
-      Nothing extra is required, aside from choosing the Cinematic theme on this
-      website and in Shabad OS.
-    </p>
-    <p>
-      Instead, if you want to use a custom AKJ theme, then please use one of the
-      custom Shabad OS themes to match it.
-    </p>
-    <p>Right-click > "Save Link As..."</p>
-    <ul>
-      <li>
-        <a href="shabad os/AKJ Dark.css" target="_blank" download
-          >AKJ Dark.css</a
-        >
-      </li>
-      <li>
-        <a href="shabad os/AKJ Light.css" target="_blank" download
-          >AKJ Light.css</a
-        >
-      </li>
-      <li>
-        <a href="shabad os/AKJ Classic.css" target="_blank" download
-          >AKJ Classic.css</a
-        >
-      </li>
-    </ul>
-    <ul>
-      <li>
-        <a href="shabad os/AKJ Minimal Dark.css" target="_blank" download
-          >AKJ Minimal Dark.css</a
-        >
-      </li>
-      <li>
-        <a href="shabad os/AKJ Minimal Light.css" target="_blank" download
-          >AKJ Minimal Light.css</a
-        >
-      </li>
-      <li>
-        <a href="shabad os/AKJ Minimal Classic.css" target="_blank" download
-          >AKJ Minimal Classic.css</a
-        >
-      </li>
-    </ul>
-    <p>Use any of the above theme files in the following guide:</p>
-    <ul>
-      <li>
-        <a
-          target="_blank"
-          href="https://www.shabados.com/support/import-an-overlay-theme"
-          >www.shabados.com/support/import-an-overlay-theme</a
-        >
-      </li>
-      <li>
-        Move any theme files to the folder location of Shabad OS overlay themes.
-      </li>
-      <li>Select the matching theme in Shabad OS.</li>
-    </ul>
-    <p><b>Zoom Levels</b></p>
-    <p>
-      You can match the zoom level of the AKJ overlay with the Shabad OS overlay
-      using a decimal factor for size percentage. Use a text-editor to open the
-      Shabad OS <code>.css</code> file.
-    </p>
-    <ul>
-      <li>
-        Update zoom level by editing the
-        <code>--zoom: 1;</code> to your desired zoom level.
-      </li>
-      <li>For example, use <code>--zoom: 1.5;</code> for 150% zoom.</li>
-      <li>
-        There is also a secondary zoom factor for translations. By default they
-        are set to 60% of the gurbani size.
-      </li>
-      <li>
-        For example, use <code>--secondary-scale-factor: 0.5;</code> for 50%.
-      </li>
-    </ul>
+    <details>
+      <summary>Match with other themes</summary>
+      <div class="collapsible-content">
+        <p>
+          Use one of the custom Shabad OS themes below to match your chosen AKJ
+          theme.
+        </p>
+        <p>Right-click &gt; "Save Link As..."</p>
+        <ul>
+          <li>
+            <a href="shabad os/AKJ Dark.css" target="_blank" download
+              >AKJ Dark.css</a
+            >
+          </li>
+          <li>
+            <a href="shabad os/AKJ Light.css" target="_blank" download
+              >AKJ Light.css</a
+            >
+          </li>
+          <li>
+            <a href="shabad os/AKJ Classic.css" target="_blank" download
+              >AKJ Classic.css</a
+            >
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a href="shabad os/AKJ Minimal Dark.css" target="_blank" download
+              >AKJ Minimal Dark.css</a
+            >
+          </li>
+          <li>
+            <a href="shabad os/AKJ Minimal Light.css" target="_blank" download
+              >AKJ Minimal Light.css</a
+            >
+          </li>
+          <li>
+            <a href="shabad os/AKJ Minimal Classic.css" target="_blank" download
+              >AKJ Minimal Classic.css</a
+            >
+          </li>
+        </ul>
+        <p>Use any of the above theme files in the following guide:</p>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              href="https://www.shabados.com/support/import-an-overlay-theme"
+              >www.shabados.com/support/import-an-overlay-theme</a
+            >
+          </li>
+          <li>
+            Move any theme files to the folder location of Shabad OS overlay
+            themes.
+          </li>
+          <li>Select the matching theme in Shabad OS.</li>
+        </ul>
+        <p><b>Zoom Levels</b></p>
+        <p>
+          You can match the zoom level of the AKJ overlay with the Shabad OS
+          overlay using a decimal factor for size percentage. Use a text-editor
+          to open the Shabad OS <code>.css</code> file.
+        </p>
+        <ul>
+          <li>
+            Update zoom level by editing the
+            <code>--zoom: 1;</code> to your desired zoom level.
+          </li>
+          <li>For example, use <code>--zoom: 1.5;</code> for 150% zoom.</li>
+          <li>
+            There is also a secondary zoom factor for translations. By default
+            they are set to 60% of the gurbani size.
+          </li>
+          <li>
+            For example, use <code>--secondary-scale-factor: 0.5;</code> for
+            50%.
+          </li>
+        </ul>
+      </div>
+    </details>
   </body>
 
   <script>
@@ -667,7 +741,8 @@
 
     function updateState() {
       var url = new URL(
-        window.location.href.split("/").slice(0, -1).join("/") + "/overlay.html"
+        window.location.href.split("/").slice(0, -1).join("/") +
+          "/overlay.html",
       );
 
       if (title.value && title.value.trim() !== "Akhand Keertan Smaagam") {
@@ -715,7 +790,7 @@
           template.classList.remove("highlight");
         }, 200);
       },
-      false
+      false,
     );
 
     templateArea.addEventListener(
@@ -723,7 +798,7 @@
       function () {
         template.classList.remove("highlight");
       },
-      false
+      false,
     );
 
     template.addEventListener(
@@ -737,7 +812,7 @@
         }
         template.value = "blank";
       },
-      false
+      false,
     );
 
     title.addEventListener(
@@ -745,7 +820,7 @@
       function () {
         updateState();
       },
-      false
+      false,
     );
 
     zoom.addEventListener(
@@ -754,7 +829,7 @@
         zoomLegend.innerText = Math.round(zoom.value * 100);
         updateState();
       },
-      false
+      false,
     );
 
     themeArea.addEventListener(
@@ -765,7 +840,7 @@
           theme.classList.remove("highlight");
         }, 200);
       },
-      false
+      false,
     );
 
     themeArea.addEventListener(
@@ -773,7 +848,7 @@
       function () {
         theme.classList.remove("highlight");
       },
-      false
+      false,
     );
 
     theme.addEventListener(
@@ -781,7 +856,7 @@
       function () {
         updateState();
       },
-      false
+      false,
     );
 
     minimalArea.addEventListener(
@@ -791,7 +866,7 @@
         minimalArea.querySelector("span").innerText = minimal ? "On" : "Off";
         updateState();
       },
-      false
+      false,
     );
 
     banner.addEventListener(
@@ -799,7 +874,7 @@
       function () {
         updateState();
       },
-      false
+      false,
     );
 
     codeboxArea.addEventListener(
@@ -821,10 +896,10 @@
             setTimeout(function () {
               codeboxHint.innerText = "Click to copy";
             }, 2000);
-          }
+          },
         );
       },
-      false
+      false,
     );
   </script>
 </html>
